@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import getDocumentById from "../signinimpfun/signinimpfun";
+
 const EmailLogin = () => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [notvalid, setNotValid] = useState<boolean>(false); // State for no record found
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Basic form validation
@@ -14,19 +17,26 @@ const EmailLogin = () => {
       return;
     }
 
-    // Check if email format is valid (you can use regex or a validation library)
+    // Check if email format is valid
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
-    //after this eve
-    // Clear errors and proceed with login (e.g., send magic link or OTP)
-    setError(null);
-    setSubmitted(true);
 
-    // Simulate an async action like sending a magic link or OT
-    // In a real scenario, you would call your backend API here.
+    let result = await getDocumentById("nurse", email);
+    if (result) {
+      setSubmitted(true);
+      setNotValid(false); // Reset no record found state
+      console.log(result);
+    } else {
+      setSubmitted(false); // Reset submitted state
+      setNotValid(true); // Set no record found state
+      setError(null); // Clear error state
+      setTimeout(() => {
+        setNotValid(false); // Clear no record found state after 2 seconds
+      }, 2000);
+    }
   };
 
   return (
@@ -39,17 +49,15 @@ const EmailLogin = () => {
           Login with your email below
         </p>
 
-        {/* Show success message after submission */}
         {submitted ? (
           <div className="text-center">
             <p className="text-green-600 font-semibold">
               A login link has been sent to your email.
             </p>
-            <p className="text-gray-600 mt-2">Please check your inbox.</p>
+            <p className="text-gray-600 mt-2">You Logged In As A Nurse...</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
-            {/* Email Input */}
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -66,14 +74,18 @@ const EmailLogin = () => {
               />
             </div>
 
-            {/* Error Message */}
+            {/* Error Message for Invalid Email or No Record Found */}
             {error && (
               <div className="mb-4 text-red-500 text-sm text-center">
                 {error}
               </div>
             )}
+            {notvalid && (
+              <div className="mb-4 text-white font-bold bg-red-500 rounded-md p-2 text-center">
+                No record found
+              </div>
+            )}
 
-            {/* Login Button */}
             <button
               type="submit"
               className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md transition duration-200">

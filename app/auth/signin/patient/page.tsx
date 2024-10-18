@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import getDocumentById from "../signinimpfun/signinimpfun";
 
 const PatientLogin: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [notvalid, setNotValid] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Basic form validation
@@ -22,17 +24,23 @@ const PatientLogin: React.FC = () => {
       return;
     }
 
-    setError(null);
-    setSubmitted(true);
-
-    // Simulate async login logic (e.g., sending a magic link or OTP)
-    console.log("Sending login link to:", email);
+    let result = await getDocumentById("patients", email);
+    if (result) {
+      setSubmitted(true);
+      console.log(result);
+    } else {
+      console.log("no nurse found");
+      setNotValid(true);
+      setError(null);
+      setTimeout(() => {
+        setNotValid(false);
+      }, 2000);
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        {/* Heading */}
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Patient Login
         </h1>
@@ -40,17 +48,15 @@ const PatientLogin: React.FC = () => {
           Enter your email below to login
         </p>
 
-        {/* Show success message after submission */}
         {submitted ? (
           <div className="text-center">
             <p className="text-green-600 font-semibold">
-              A login link has been sent to your email.
+              Logged In Successfully, We Welcome You
             </p>
-            <p className="text-gray-600 mt-2">Please check your inbox.</p>
+            <p className="text-gray-600 mt-2">You logged In As A Patient...</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
-            {/* Email Input */}
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -67,17 +73,21 @@ const PatientLogin: React.FC = () => {
               />
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="mb-4 text-red-500 text-sm text-center">
                 {error}
               </div>
             )}
 
-            {/* Login Button */}
+            {notvalid && (
+              <div className="mb-4 text-white font-bold bg-red-500 rounded-md p-2 text-center">
+                No record found
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full py-2 bg-blue-500 hover:bg-blue-600 hover:bg-black text-white font-bold rounded-md transition duration-200">
+              className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md transition duration-200">
               Login via Email
             </button>
           </form>
