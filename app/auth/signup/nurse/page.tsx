@@ -51,6 +51,8 @@ const LoginPage = () => {
           Longitude: location.longitude,
           TotalNoOfPatientsAppeared: 0,
           AverageRating: 0,
+          requestAccepted: 0,
+          isAvailable: true,
         },
         email, // Use email as document ID
       );
