@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 const Card = ({
   Name,
   ContactNo,
@@ -11,7 +11,6 @@ const Card = ({
   Email: string;
   isAvailable: boolean;
 }) => {
-  const router = useRouter();
   return (
     <div className="w-full p-4">
       <div className="w-full border-2 border-gray-100 bg-white shadow-md rounded-lg px-8 py-4 h-auto  flex justify-center items-start flex-col">
@@ -33,10 +32,7 @@ const Card = ({
           </svg>
           <span>{ContactNo}</span>
         </div>
-        <div
-          className="flex text-sm items-center text-gray-600 mb-2"
-          onClick={() => {}}
-        >
+        <div className="flex text-sm items-center text-gray-600 mb-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-2"
@@ -53,7 +49,10 @@ const Card = ({
           </svg>
           <span>{Email}</span>
         </div>
-        <div className="flex text-sm items-center text-blue-500 cursor-pointer mb-2">
+        <Link
+          href={`/pages/nurseinfo/${Email}`}
+          className="flex text-sm items-center text-blue-500 cursor-pointer mb-2"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-2"
@@ -69,7 +68,7 @@ const Card = ({
             />
           </svg>
           <span>View Profile</span>
-        </div>
+        </Link>
         <div className="mt-4 self-end rounded-full border-2 border-green-500">
           <span
             className={`inline-block px-6 py-3  text-sm font-semibold text-green-800 bg-green-100 rounded-full ${

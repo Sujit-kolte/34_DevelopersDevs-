@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "@/firebase.config";
 import Card from "../Card"; // Ensure you have the correct import for the Card component
+import { ImSpinner } from "react-icons/im";
 
 // Define a type for Nurse
 interface Nurse {
@@ -30,8 +31,8 @@ const Page: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full grid grid-cols-1  md:grid-cols-2 place-content-start place-items-center ">
-      {nurses.length > 0 &&
+    <div className="flex flex-row flex-wrap min-w-screen-sm h-fit justify-center">
+      {nurses.length > 0 ? (
         nurses.map((val) => (
           <Card
             key={val.id} // Use the document id as the key
@@ -40,7 +41,12 @@ const Page: React.FC = () => {
             Email={val.Email}
             isAvailable={val.isAvailable}
           />
-        ))}
+        ))
+      ) : (
+        <div className="block mx-auto my-5">
+          <ImSpinner className="animate-spin size-20" />
+        </div>
+      )}
     </div>
   );
 };

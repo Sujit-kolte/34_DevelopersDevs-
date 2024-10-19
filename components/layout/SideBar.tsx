@@ -13,7 +13,7 @@ import { GiRemedy } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { IoIosHelpCircle } from "react-icons/io";
 import { TbSquareToggle } from "react-icons/tb";
 // Using Heroicons
 
@@ -39,8 +39,8 @@ const Sidebar = () => {
           href="/patient/home"
           className={`flex items-center space-x-3 hover:bg-gray-700 px-4 py-2 rounded-md`}
         >
-          <IoMdHome className="h-6 w-6 text-white-900" />
-          <span>Home</span>
+          <IoIosHelpCircle className="h-6 w-6 text-white-900" />
+          <span>Help</span>
         </Link>
 
         {/* Inbox */}

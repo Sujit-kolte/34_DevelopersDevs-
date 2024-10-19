@@ -19,7 +19,8 @@ const PatientDetailsPage = () => {
         style={{
           backgroundImage:
             "url('https://source.unsplash.com/600x800/?patient')",
-        }}>
+        }}
+      >
         <h1 className="text-4xl font-bold mb-2 text-black">RapidAid</h1>
         <h2 className="text-2xl font-semibold text-black">welcomes you!</h2>
       </div>
@@ -77,7 +78,8 @@ const PatientDetailsPage = () => {
           <div>
             <label
               htmlFor="location"
-              className="block text-gray-700 font-medium">
+              className="block text-gray-700 font-medium"
+            >
               Location
             </label>
             <input
@@ -92,7 +94,8 @@ const PatientDetailsPage = () => {
           {/* View Location Button */}
           <button
             type="button" // Change to "button" since it's not a submit
-            className="flex items-center justify-center w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200">
+            className="flex items-center justify-center w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200"
+          >
             <span className="mr-2">📍</span> {/* Symbol for location */}
             View Location on Map
           </button>
