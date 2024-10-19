@@ -63,7 +63,7 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-start flex-col gap-3 relative p-2">
+    <div className="w-full h-screen flex justify-center items-start flex-col gap-3 relative p-2">
       <div className="w-full mb-32 h-full flex justify-start items-start overflow-auto flex-col gap-4 no-scrollbar p-4">
         {data.length === 0 && (
           <div className="w-full h-full flex justify-center items-center flex-col font-bold tracking-wider">

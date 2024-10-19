@@ -1,12 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import getDocumentById from "../signinimpfun/signinimpfun";
+import { useAppDispatch } from "@/app/hooks";
+import { createPatient } from "@/app/store/patientSlice";
+import { patientType } from "@/app/types/patienttype";
 
 const PatientLogin: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [notvalid, setNotValid] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +32,7 @@ const PatientLogin: React.FC = () => {
     if (result) {
       setSubmitted(true);
       console.log(result);
+      dispatch(createPatient(result as patientType));
     } else {
       console.log("no nurse found");
       setNotValid(true);
