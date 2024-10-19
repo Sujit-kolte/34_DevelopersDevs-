@@ -92,3 +92,14 @@ body {
     @apply bg-background text-foreground;
   }
 }
+@keyframes grow {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-grow {
+  animation: grow 0.3s ease-in-out forwards;
+}
