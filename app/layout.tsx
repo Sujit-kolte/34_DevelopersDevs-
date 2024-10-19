@@ -28,9 +28,9 @@ export default function RootLayout({
     <html lang="en">
       <StoreProvider>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
+          className={`relative ${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <div id="portal-root"></div>
+          <div className="w-full h-full">{children}</div>
         </body>
       </StoreProvider>
     </html>

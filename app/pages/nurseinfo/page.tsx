@@ -1,7 +1,7 @@
 // src/PatientDetailsPage.jsx
 import React from "react";
 import PercentageDisplay from "../../../components/own/PercentageDisplay";
-
+import { getNurseInfo } from "@/app/store/nurseSlice";
 const PatientDetailsPage = () => {
   // Dummy data for success rate
   const requestsAccepted = 150;
