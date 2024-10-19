@@ -18,7 +18,6 @@ import { TbSquareToggle } from "react-icons/tb";
 // Using Heroicons
 
 const Sidebar = () => {
-  const router = useRouter();
   const [close, setCLose] = useState<boolean>(false);
   return (
     <div className="h-screen w-64 bg-blue-500 text-white sticky">
@@ -29,7 +28,7 @@ const Sidebar = () => {
       >
         RapidAid
         <div className="absolute cursor right-5 z-100">
-          <IoClose className="className=" h-6 w-6 text-gray-700 />
+          <IoClose className=" h-6 w-6 text-gray-700" />
         </div>
       </div>
 

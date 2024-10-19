@@ -15,6 +15,8 @@ const initialState: nurseType = {
   Longitude: "",
   Name: "",
   TotalNoOfPatientsAppeared: "",
+  requestAccepted: 0,
+  isAvailable: false,
 };
 
 export const NurseSlice = createSlice({
