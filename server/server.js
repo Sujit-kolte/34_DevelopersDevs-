@@ -45,13 +45,6 @@ const fetchAllNurses = async () => {
 
 io.on("connection", (socket) => {
   socket.io("help", async ({ email, lan, lng }) => {
-    const nurses = await fetchAllNurses();
-    const targetCoordinate = { lat: lan, lon: lng };
-    const mapping = {};
-    nurses.forEach((val) => {
-      mapping[{ lat: Latitide, lng: Longitude }] = val.Email;
-    });
-    console.log(mapping);
     const sort = [];
   });
 });

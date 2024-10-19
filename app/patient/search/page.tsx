@@ -31,7 +31,7 @@ const Page: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-row flex-wrap min-w-screen-sm h-fit justify-center">
+    <div className="w-screen  overflow-hidden overflow-y-scroll no-scrollbar flex flex-row flex-wrap min-w-screen-sm h-fit justify-center">
       {nurses.length > 0 ? (
         nurses.map((val) => (
           <Card
