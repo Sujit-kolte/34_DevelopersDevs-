@@ -1,8 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import getDocumentById from "../signinimpfun/signinimpfun";
-
+import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { createNurse, updateCoordinates } from "@/app/store/nurseSlice";
+import { RootState } from "@/app/store";
+import { nurseType } from "@/app/types/nursetype";
 const EmailLogin = () => {
+  const dispatch = useDispatch();
+  const nurseInfo = useSelector((state: RootState) => state.nurse);
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -29,6 +34,8 @@ const EmailLogin = () => {
       setSubmitted(true);
       setNotValid(false); // Reset no record found state
       console.log(result);
+
+      dispatch(createNurse(result as nurseType));
     } else {
       setSubmitted(false); // Reset submitted state
       setNotValid(true); // Set no record found state

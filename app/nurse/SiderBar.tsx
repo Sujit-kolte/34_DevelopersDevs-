@@ -9,7 +9,7 @@ import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import { IoIosHelpCircle } from "react-icons/io";
 import { TbSquareToggle } from "react-icons/tb";
-// Using Heroicons
+import { IoMdNotifications } from "react-icons/io";
 
 const Sidebar = () => {
   const [close, setCLose] = useState<boolean>(false);
@@ -29,15 +29,15 @@ const Sidebar = () => {
       <nav className="flex flex-col space-y-4 px-4">
         {/* Home */}
         <Link
-          href="/patient/home"
-          className={`flex items-center space-x-3  hover:bg-red-100 hover:text-black px-4 py-2 rounded-md`}>
-          <IoIosHelpCircle className="h-6 w-6 text-white-900" />
-          <span>Help</span>
+          href="/nurse/home"
+          className={`flex items-center space-x-3  px-4 py-2 rounded-md hover:bg-red-100 hover:text-black`}>
+          <IoMdHome className="h-6 w-6 text-white-900" />
+          <span>Home</span>
         </Link>
 
         {/* Inbox */}
         <Link
-          href="/patient/profile"
+          href="/nurse/profile"
           className="flex items-center space-x-3  hover:bg-red-100 hover:text-black px-4 py-2 rounded-md">
           <IoPerson className="h-6 w-6 text-white-900" />
           <span>Profile</span>
@@ -46,17 +46,17 @@ const Sidebar = () => {
         {/* Calendar */}
         <Link
           href="/chatbot"
-          className="flex items-center space-x-3  hover:bg-red-100 hover:text-black px-4 py-2 rounded-md">
+          className="flex items-center space-x-3 h hover:bg-red-100 hover:text-black px-4 py-2 rounded-md">
           <IoChatboxEllipsesOutline className="h-6 w-6 text-white-900" />
           <span>Chatbot</span>
         </Link>
 
         {/* Search */}
         <Link
-          href="/patient/search"
+          href="/nurse/notification"
           className="flex items-center space-x-3  hover:bg-red-100 hover:text-black px-4 py-2 rounded-md">
-          <FaSearch className="h-6 w-6 text-white-400" />
-          <span>Search</span>
+          <IoMdNotifications className="h-6 w-6 text-white-400" />
+          <span>Notification</span>
         </Link>
 
         {/* Settings */}

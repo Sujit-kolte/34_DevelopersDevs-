@@ -78,15 +78,6 @@ const PatientDetailsPage = ({
       {data && !status.loading && (
         <div className="flex flex-col md:flex-row h-screen">
           {/* Left Partition: Image with Welcome Message */}
-          <div
-            className="flex-1 bg-cover bg-center hidden md:flex flex-col justify-start items-start p-8 text-white"
-            style={{
-              backgroundImage:
-                "url('https://source.unsplash.com/600x800/?patient')",
-            }}>
-            <h1 className="text-4xl font-bold mb-2 text-black">RapidAid</h1>
-            <h2 className="text-2xl font-semibold text-black">welcomes you!</h2>
-          </div>
 
           {/* Right Partition: Input Fields */}
           <div className="flex-1 flex flex-col justify-center items-center p-8 bg-gray-100">
