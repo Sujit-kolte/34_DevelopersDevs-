@@ -7,4 +7,6 @@ export type nurseType = {
   Longitude: string;
   Name: string;
   TotalNoOfPatientsAppeared: string;
+  requestAccepted: number;
+  isAvailable: boolean;
 };

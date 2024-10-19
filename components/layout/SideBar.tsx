@@ -7,12 +7,11 @@ import { GiRemedy } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { IoIosHelpCircle } from "react-icons/io";
 import { TbSquareToggle } from "react-icons/tb";
 // Using Heroicons
 
 const Sidebar = () => {
-  const router = useRouter();
   const [close, setCLose] = useState<boolean>(false);
   return (
     <div className="h-screen w-64 bg-blue-500 text-white sticky">
@@ -22,7 +21,7 @@ const Sidebar = () => {
       ">
         RapidAid
         <div className="absolute cursor right-5 z-100">
-          <IoClose className="className=" h-6 w-6 text-gray-700 />
+          <IoClose className=" h-6 w-6 text-gray-700" />
         </div>
       </div>
 
@@ -32,8 +31,8 @@ const Sidebar = () => {
         <Link
           href="/patient/home"
           className={`flex items-center space-x-3 hover:bg-gray-700 px-4 py-2 rounded-md`}>
-          <IoMdHome className="h-6 w-6 text-white-900" />
-          <span>Home</span>
+          <IoIosHelpCircle className="h-6 w-6 text-white-900" />
+          <span>Help</span>
         </Link>
 
         {/* Inbox */}

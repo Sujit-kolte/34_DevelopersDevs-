@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import patientsliceReducer from "./store/patientSlice";
 import nursesliceReducer from "./store/nurseSlice";
 // ...
+import socketReducer from "./store/socketSlice";
 
 export const store = configureStore({
   reducer: {
     patient: patientsliceReducer,
     nurse: nursesliceReducer,
+    socket: socketReducer,
   },
 });
 
