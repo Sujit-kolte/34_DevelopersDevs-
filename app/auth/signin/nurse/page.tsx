@@ -1,47 +1,53 @@
 "use client";
 import React, { useState } from "react";
-import getDocumentById from "../signinimpfun/signinimpfun";
-import { useDispatch, UseDispatch, useSelector } from "react-redux";
-import { createNurse, updateCoordinates } from "@/app/store/nurseSlice";
-import { RootState } from "@/app/store";
-import { nurseType } from "@/app/types/nursetype";
+import getDocumentById from "../signinimpfun/signinimpfun"; // Import function to fetch nurse data by email
+import { useDispatch, useSelector } from "react-redux"; // Redux hooks for dispatching actions and selecting state
+import { createNurse } from "@/app/store/nurseSlice"; // Action to create nurse record
+import { RootState } from "@/app/store"; // Type for accessing the state in the store
+import { nurseType } from "@/app/types/nursetype"; // Type for nurse data
+
+// Functional component for Email Login
 const EmailLogin = () => {
-  const dispatch = useDispatch();
-  const nurseInfo = useSelector((state: RootState) => state.nurse);
-  const [email, setEmail] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const [notvalid, setNotValid] = useState<boolean>(false); // State for no record found
+  const dispatch = useDispatch(); // Used to dispatch actions to the Redux store
+  const nurseInfo = useSelector((state: RootState) => state.nurse); // Fetch current nurse state from Redux store
+  const [email, setEmail] = useState<string>(""); // State to hold input email value
+  const [error, setError] = useState<string | null>(null); // State for displaying error messages
+  const [submitted, setSubmitted] = useState<boolean>(false); // State to track form submission status
+  const [notvalid, setNotValid] = useState<boolean>(false); // State to track if no record is found for the entered email
 
+  // Function to handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
-    // Basic form validation
+    // Basic form validation to check if email field is empty
     if (!email) {
       setError("Please enter your email address.");
       return;
     }
 
-    // Check if email format is valid
+    // Validate email format using a regular expression
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
 
+    // Fetch nurse document by email
     let result = await getDocumentById("nurse", email);
     if (result) {
-      setSubmitted(true);
-      setNotValid(false); // Reset no record found state
+      setSubmitted(true); // Mark form as submitted
+      setNotValid(false); // Reset the "no record found" state
       console.log(result);
 
+      // Dispatch action to create nurse in the Redux store
       dispatch(createNurse(result as nurseType));
     } else {
-      setSubmitted(false); // Reset submitted state
-      setNotValid(true); // Set no record found state
-      setError(null); // Clear error state
+      setSubmitted(false); // Reset submission state if no record is found
+      setNotValid(true); // Mark as "no record found"
+      setError(null); // Clear error messages
+      // Clear the "no record found" state after 2 seconds
       setTimeout(() => {
-        setNotValid(false); // Clear no record found state after 2 seconds
+        setNotValid(false);
       }, 2000);
     }
   };
@@ -49,6 +55,7 @@ const EmailLogin = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        {/* Header and description */}
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Login as a Nurse
         </h1>
@@ -56,6 +63,7 @@ const EmailLogin = () => {
           Login with your email below
         </p>
 
+        {/* Conditionally render login confirmation or login form */}
         {submitted ? (
           <div className="text-center">
             <p className="text-green-600 font-semibold">
@@ -81,7 +89,7 @@ const EmailLogin = () => {
               />
             </div>
 
-            {/* Error Message for Invalid Email or No Record Found */}
+            {/* Display error message if email is invalid or no record is found */}
             {error && (
               <div className="mb-4 text-red-500 text-sm text-center">
                 {error}
@@ -93,6 +101,7 @@ const EmailLogin = () => {
               </div>
             )}
 
+            {/* Submit button */}
             <button
               type="submit"
               className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md transition duration-200">
